@@ -1,0 +1,16 @@
+{
+  "expo": {
+    "name": "projeto-mobile",
+    "slug": "projeto-mobile",
+    "scheme": "projeto-mobile",
+    "plugins": [
+      "expo-router"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    },
+    "web": {
+      "bundler": "metro"
+    }
+  }
+}
