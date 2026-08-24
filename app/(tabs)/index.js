@@ -2,7 +2,7 @@ import { Link } from "expo-router";
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-const trevizolliLogo = require("../../assets/trevizolli-logo.svg");
+const trevizolliLogo = require("../../assets/trevizolli-logo.png");
 
 export default function HomeScreen() {
   return (
@@ -10,8 +10,14 @@ export default function HomeScreen() {
       <View style={styles.container}>
         <View style={styles.hero}>
           <Image
-            require={trevizolliLogo}
-            style={styles.logo}
+            source={trevizolliLogo}
+            resizeMode="contain"
+            style={{
+              width: '100%',
+              height: 320,
+              transform: [{ scale: 2 }],     
+              marginVertical: -80,
+            }}
           />
           <Text style={styles.eyebrow}>React Native + Expo Router</Text>
           <Text style={styles.title}>Um app organizado</Text>

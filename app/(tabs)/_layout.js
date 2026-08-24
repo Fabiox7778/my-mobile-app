@@ -26,6 +26,20 @@ export default function TabsLayout() {
           headerTitle: "Conteúdo",
         }}
       />
+      <Tabs.Screen
+        name="get"
+        options={{
+          title: "Animes",
+          headerTitle: "Lista de animes",
+        }}
+      />
+      <Tabs.Screen
+        name="post"
+        options={{
+          title: "Criar",
+          headerTitle: "Criar anime",
+        }}
+      />
     </Tabs>
   );
 }

@@ -6,7 +6,7 @@ export default function Sobre() {
     return (
     <View style={styles.container}>
       <View style={styles.whiteBox}>
-        <Image source={require('../../public/images/myPicture.webp')} style={styles.myPicture} />
+        <Image source={require('../../assets/myPicture.webp')} style={styles.myPicture} />
         <Text style={styles.title}>Dev Fabio T.</Text>
         <Text>Full Stack Developer</Text>
         <View style={styles.socialBox}>

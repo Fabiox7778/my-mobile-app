@@ -1,0 +1,102 @@
+import { React, useState, useEffect } from "react"
+import { View, Text, Image, ActivityIndicator, ScrollView, StyleSheet } from "react-native"
+import axios from "axios" // lib usada pra fazer chamadas HTTP para API
+import { SafeAreaView } from "react-native-safe-area-context" // evita que conteudo fique embaixo do notch/barra do celular
+
+const API_KEY = "cv_D8ljS9Qd0DZntaavU1Fvf0UoNyfYjiH8EAtykKdVWV9RsD2beBn1yD2eMWeiLrXu" // API do codeverse
+
+const api = axios.create({
+    baseURL: "https://api-ds.codeverse.dev.br",
+    headers: {
+        "x-api-key": API_KEY // passo pelo header a key da API
+    }
+})
+
+const API_BASE_URL = "https://api-ds.codeverse.dev.br"
+
+function imagemCompleta(url) {
+    if (!url) return null
+    return url.startsWith("http") ? url : `${API_BASE_URL}${url}`
+}
+
+export default function AnimesListarScreen() {
+    const [animes, setAnimes] = useState([])
+    const [carregando, setCarregando] = useState(true)
+    const [erro, setErro] = useState(null)
+
+    async function buscarAnimes() {
+        setCarregando(true)
+        setErro(null)
+        try {
+            const resposta = await api.get("/api/animes", {
+                params: { limit: 50 }
+            })
+            setAnimes(Array.isArray(resposta.data.data) ? resposta.data.data : [])
+        } catch (error) {
+            setErro("Não foi possivel carregar animes")
+        } finally {
+            setCarregando(false)
+        }
+    }
+
+    useEffect(() => {
+        buscarAnimes()
+    }, [])
+
+    return (
+        <SafeAreaView style={styles.safeArea}>
+            <ScrollView contentContainerStyle={styles.conteudo}>
+                <View style={styles.header}>
+                    <Text style={styles.tituloPagina}>Listar animes</Text>
+                    <Text style={styles.subtitulo}>GET /api/animes</Text>
+                </View>
+
+                {carregando && <ActivityIndicator style={{ marginVertical: 16 }} />}
+
+                {erro && <Text style={styles.erro}>{erro}</Text>}
+
+                {!carregando &&
+                    animes.map((anime) => (
+                        <View key={anime.id} style={styles.card}>
+                            {imagemCompleta(anime.imageUrl) ? (
+                                <Image source={{ uri: imagemCompleta(anime.imageUrl) }} style={styles.imagem} />
+                            ) : (
+                                <View style={styles.imagemSemFoto} />
+                            )}
+                            <View style={styles.info}>
+                                <Text style={styles.titulo}>{anime.title}</Text>
+                                <Text style={styles.categoria}>
+                                    {anime.status} · {anime.estudio}
+                                </Text>
+                                <Text style={styles.genero}>{anime.genero}</Text>
+                            </View>
+                        </View>
+                    ))}
+            </ScrollView>
+        </SafeAreaView>
+    );
+}
+
+const styles = StyleSheet.create({
+    safeArea: { flex: 1, backgroundColor: "#f8fbff" }, // ocupa a tela toda, cor de fundo clara
+    conteudo: { padding: 24, paddingBottom: 48 }, // respiro nas bordas do conteúdo
+    header: { marginBottom: 16 }, // espaço abaixo do cabeçalho
+    tituloPagina: { fontSize: 24, fontWeight: "800", color: "#102542" }, // título grande e escuro
+    subtitulo: { fontSize: 14, color: "#5f6b7a", marginTop: 2 }, // texto menor e mais claro, abaixo do título
+
+    erro: { color: "#c62828", marginTop: 12 }, // texto de erro em vermelho
+    card: {
+        flexDirection: "row", // imagem e texto lado a lado
+        gap: 12, // espaço entre imagem e texto
+        marginTop: 12, // espaço entre um card e outro
+        backgroundColor: "white",
+        borderRadius: 10, // cantos arredondados
+        overflow: "hidden", // corta a imagem nos cantos arredondados do card
+    },
+    imagem: { width: 64, height: 64 }, // tamanho fixo da foto do herói
+    imagemSemFoto: { width: 64, height: 64, backgroundColor: "#e2e8f0" },
+    info: { flex: 1, justifyContent: "center", paddingRight: 12 }, // ocupa o espaço que sobra ao lado da imagem
+    titulo: { fontSize: 16, fontWeight: "700" }, // nome do herói em destaque
+    categoria: { fontSize: 13, color: "#64748b" }, // categoria/ano em cinza, menor
+    genero: { fontSize: 13, color: "#64748b", marginTop: 2 },
+});
