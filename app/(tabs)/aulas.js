@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: "700",
     color: "#ffffff",
-    backgroundColor: "#f59e0b",
+    backgroundColor: "#c62828",
   },
   listText: {
     flex: 1,

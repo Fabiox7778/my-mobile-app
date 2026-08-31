@@ -1,8 +1,18 @@
 import { Link } from "expo-router";
-import { Image, Pressable, StyleSheet, Text, View } from "react-native";
+import {
+  Dimensions,
+  Image,
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const trevizolliLogo = require("../../assets/trevizolli-logo.png");
+const { width } = Dimensions.get("window");
+const logoHeight = Math.min(width * 0.58, 260);
+const isSmallScreen = width < 360;
 
 export default function HomeScreen() {
   return (
@@ -13,10 +23,10 @@ export default function HomeScreen() {
             source={trevizolliLogo}
             resizeMode="contain"
             style={{
-              width: '100%',
-              height: 320,
-              transform: [{ scale: 2 }],     
-              marginVertical: -80,
+              width: "100%",
+              height: logoHeight,
+              marginVertical: -18,
+              transform: [{ scale: isSmallScreen ? 1.15 : 1.6 }],
             }}
           />
           <Text style={styles.eyebrow}>React Native + Expo Router</Text>
@@ -52,15 +62,19 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    padding: 24,
-    gap: 20,
+    paddingHorizontal: 20,
+    paddingTop: 16,
+    paddingBottom: 20,
+    gap: 18,
   },
   hero: {
     alignItems: "center",
     gap: 10,
-    padding: 24,
+    paddingHorizontal: 20,
+    paddingTop: 10,
+    paddingBottom: 22,
     borderRadius: 24,
-    backgroundColor: "#7a41ff",
+    backgroundColor: "#000653",
   },
   logo: {
     width: 120,
@@ -68,7 +82,7 @@ const styles = StyleSheet.create({
     marginBottom: 4,
   },
   eyebrow: {
-    fontSize: 13,
+    fontSize: 12,
     fontWeight: "700",
     letterSpacing: 1,
     textTransform: "uppercase",
@@ -76,14 +90,14 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   title: {
-    fontSize: 32,
+    fontSize: isSmallScreen ? 26 : 32,
     fontWeight: "800",
     color: "#ffffff",
     textAlign: "center",
   },
   description: {
-    fontSize: 16,
-    lineHeight: 24,
+    fontSize: isSmallScreen ? 14 : 16,
+    lineHeight: isSmallScreen ? 21 : 24,
     color: "#edf5ff",
     textAlign: "center",
   },
@@ -101,13 +115,14 @@ const styles = StyleSheet.create({
   cardItem: {
     fontSize: 15,
     color: "#334e68",
+    lineHeight: 22,
   },
   button: {
     paddingVertical: 16,
     paddingHorizontal: 20,
     borderRadius: 16,
     alignItems: "center",
-    backgroundColor: "#381e77",
+    backgroundColor: "#c62828",
   },
   buttonText: {
     fontSize: 16,

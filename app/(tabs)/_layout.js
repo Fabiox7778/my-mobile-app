@@ -40,6 +40,13 @@ export default function TabsLayout() {
           headerTitle: "Criar anime",
         }}
       />
+      <Tabs.Screen
+        name="sobre"
+        options={{
+          title: "Sobre",
+          headerTitle: "Sobre o aplicativo",
+        }}
+      />
     </Tabs>
   );
 }
