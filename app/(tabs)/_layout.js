@@ -60,6 +60,16 @@ export default function TabsLayout() {
         }}
       />
       <Tabs.Screen
+        name="put"
+        options={{
+          title: "Editar",
+          headerTitle: "Editar anime",
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="pencil-outline" size={size} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
         name="sobre"
         options={{
           title: "Sobre",

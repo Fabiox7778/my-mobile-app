@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
   safeArea: { flex: 1, backgroundColor: "#f8fbff" },
   conteudo: { padding: 24, paddingBottom: 48 },
   header: { marginBottom: 16 },
-  tituloPagina: { fontSize: 24, fontWeight: "800", color: "#102542" },
+  tituloPagina: { fontSize: 24, fontWeight: "800", color: "#000653" },
   subtitulo: { fontSize: 14, color: "#5f6b7a", marginTop: 2 },
 
   erro: { color: "#000653", marginTop: 12 },
