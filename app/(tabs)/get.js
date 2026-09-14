@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
     tituloPagina: { fontSize: 24, fontWeight: "800", color: "#102542" }, // título grande e escuro
     subtitulo: { fontSize: 14, color: "#5f6b7a", marginTop: 2 }, // texto menor e mais claro, abaixo do título
 
-    erro: { color: "#c62828", marginTop: 12 }, // texto de erro em vermelho
+    erro: { color: "#000653", marginTop: 12 }, // texto de erro em azul escuro
     card: {
         flexDirection: "row", // imagem e texto lado a lado
         gap: 12, // espaço entre imagem e texto

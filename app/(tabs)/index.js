@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     borderRadius: 16,
     alignItems: "center",
-    backgroundColor: "#c62828",
+    backgroundColor: "#000653",
   },
   buttonText: {
     fontSize: 16,

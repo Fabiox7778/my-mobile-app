@@ -138,7 +138,7 @@ const styles = StyleSheet.create({
   tituloPagina: { fontSize: 24, fontWeight: "800", color: "#102542" },
   subtitulo: { fontSize: 14, color: "#5f6b7a", marginTop: 2 },
 
-  erro: { color: "#c62828", marginTop: 12 },
+  erro: { color: "#000653", marginTop: 12 },
   card: {
     flexDirection: "row",
     alignItems: "center",
@@ -161,7 +161,7 @@ const styles = StyleSheet.create({
   genero: { fontSize: 13, color: "#64748b", marginTop: 2 },
 
   botaoExcluir: {
-    backgroundColor: "#c62828",
+    backgroundColor: "#000653",
     paddingHorizontal: 14,
     paddingVertical: 8,
     borderRadius: 8,
