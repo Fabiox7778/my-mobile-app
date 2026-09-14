@@ -3,6 +3,7 @@ import {
   Dimensions,
   Image,
   Pressable,
+  ScrollView,
   StyleSheet,
   Text,
   View,
@@ -17,7 +18,10 @@ const isSmallScreen = width < 360;
 export default function HomeScreen() {
   return (
     <SafeAreaView style={styles.safeArea}>
-      <View style={styles.container}>
+      <ScrollView
+        contentContainerStyle={styles.container}
+        showsVerticalScrollIndicator={false}
+      >
         <View style={styles.hero}>
           <Image
             source={trevizolliLogo}
@@ -50,7 +54,13 @@ export default function HomeScreen() {
             <Text style={styles.buttonText}>Abrir modal de exemplo</Text>
           </Pressable>
         </Link>
-      </View>
+
+        <Link href="/aulas" asChild>
+          <Pressable style={styles.button}>
+            <Text style={styles.buttonText}>Abrir aulas</Text>
+          </Pressable>
+        </Link>
+      </ScrollView>
     </SafeAreaView>
   );
 }
@@ -61,10 +71,10 @@ const styles = StyleSheet.create({
     backgroundColor: "#f8fbff",
   },
   container: {
-    flex: 1,
+    flexGrow: 1,
     paddingHorizontal: 20,
     paddingTop: 16,
-    paddingBottom: 20,
+    paddingBottom: 40,
     gap: 18,
   },
   hero: {
