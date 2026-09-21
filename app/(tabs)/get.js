@@ -1,9 +1,9 @@
-import { React, useState, useEffect } from "react"
+import { useState, useEffect } from "react"
 import { View, Text, Image, TextInput, ActivityIndicator, ScrollView, StyleSheet } from "react-native"
 import axios from "axios"
 import { SafeAreaView } from "react-native-safe-area-context"
 
-const API_KEY = "cv_D8ljS9Qd0DZntaavU1Fvf0UoNyfYjiH8EAtykKdVWV9RsD2beBn1yD2eMWeiLrXu" 
+const API_KEY = "cv_2A1bwKgas3-94nqKQODSVJdqTJy2d9D77Eu0smDfByfiv2nHq4WFaESuKAFHCkUT" 
 
 const api = axios.create({
     baseURL: "https://api-ds.codeverse.dev.br",
@@ -56,7 +56,6 @@ export default function AnimesListarScreen() {
                     <Text style={styles.subtitulo}>GET /api/animes</Text>
                 </View>
 
-                // aq eu implementei o input de busca pelo titulo
                 <TextInput
                     style={styles.campoBusca}
                     value={busca}
@@ -64,7 +63,6 @@ export default function AnimesListarScreen() {
                     placeholder="Buscar anime pelo título"
                 />
 
-                // aq eu fiz outro input igual, mas para buscar pelo id
                 <TextInput
                     style={styles.campoBusca}
                     value={buscaId}
@@ -77,7 +75,6 @@ export default function AnimesListarScreen() {
 
                 {erro && <Text style={styles.erro}>{erro}</Text>}
 
-                // primeiro eu filtro os animes e depois uso o map para mostrar cada um
                 {!carregando &&
                     animes
                         .filter((anime) =>

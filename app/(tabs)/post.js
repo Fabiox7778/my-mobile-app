@@ -23,12 +23,11 @@ const api = axios.create({
 
 export default function AnimesCriarScreen() {
   const [titulo, setTitulo] = useState("");
-  const [descricao, setDescricao] = useState("");
   const [imagemUrl, setImagemUrl] = useState("");
-  const [status, setStatus] = useState("Finalizado");
-  const [estudio, setEstudio] = useState("");
   const [genero, setGenero] = useState("");
-  const [baseadoEmManga, setBaseadoEmManga] = useState(false);
+  const [numeroEpisodios, setNumeroEpisodios] = useState("");
+  const [anoLancamento, setAnoLancamento] = useState("");
+  const [estudio, setEstudio] = useState("");
 
   const [enviando, setEnviando] = useState(false);
 
@@ -42,22 +41,20 @@ export default function AnimesCriarScreen() {
     try {
       const resposta = await api.post("/api/animes", {
         title: titulo,
-        description: descricao,
-        imageUrl: imagemUrl,
-        status,
-        estudio,
-        baseado_em_manga: baseadoEmManga,
+        imageUrl: imagemUrl.trim() || null,
         genero,
+        numero_episodios: Number(numeroEpisodios),
+        ano_lancamento: Number(anoLancamento),
+        estudio,
       });
 
       Alert.alert("Anime criado!", resposta.data.title);
       setTitulo("");
-      setDescricao("");
       setImagemUrl("");
-      setStatus("Finalizado");
-      setEstudio("");
       setGenero("");
-      setBaseadoEmManga(false);
+      setNumeroEpisodios("");
+      setAnoLancamento("");
+      setEstudio("");
     } catch (e) {
       Alert.alert(
         "Não deu pra criar o anime",
@@ -84,14 +81,6 @@ export default function AnimesCriarScreen() {
           placeholder="Ex: Naruto"
         />
 
-        <Text style={styles.rotulo}>Descrição</Text>
-        <TextInput
-          style={styles.campo}
-          value={descricao}
-          onChangeText={setDescricao}
-          placeholder="Ex: Gennin da vila da folha"
-        />
-
         <Text style={styles.rotulo}>URL da imagem</Text>
         <TextInput
           style={styles.campo}
@@ -102,38 +91,39 @@ export default function AnimesCriarScreen() {
 
         <Text style={styles.secao}>Campos específicos do tema animes</Text>
 
-        <Text style={styles.rotulo}>Status</Text>
-        <TextInput
-          style={styles.campo}
-          value={status}
-          onChangeText={setStatus}
-          placeholder="Ex: Finalizado"
-        />
-
-        <Text style={styles.rotulo}>Estudio</Text>
-        <TextInput
-          style={styles.campo}
-          value={estudio}
-          onChangeText={setEstudio}
-          placeholder="Ex: Toei"
-        />
-
         <Text style={styles.rotulo}>Gênero</Text>
         <TextInput
           style={styles.campo}
           value={genero}
           onChangeText={setGenero}
-          placeholder="Ex: Shounen"
+          placeholder="Ex: Ação"
         />
 
-        <Pressable
-          style={styles.checkbox}
-          onPress={() => setBaseadoEmManga(!baseadoEmManga)}
-        >
-          <Text style={styles.checkboxTexto}>
-            {baseadoEmManga ? "✓" : "□"} Baseado em mangá
-          </Text>
-        </Pressable>
+        <Text style={styles.rotulo}>Número de episódios</Text>
+        <TextInput
+          style={styles.campo}
+          value={numeroEpisodios}
+          onChangeText={setNumeroEpisodios}
+          placeholder="Ex: 220"
+          keyboardType="numeric"
+        />
+
+        <Text style={styles.rotulo}>Ano de lançamento</Text>
+        <TextInput
+          style={styles.campo}
+          value={anoLancamento}
+          onChangeText={setAnoLancamento}
+          placeholder="Ex: 2002"
+          keyboardType="numeric"
+        />
+
+        <Text style={styles.rotulo}>Estúdio</Text>
+        <TextInput
+          style={styles.campo}
+          value={estudio}
+          onChangeText={setEstudio}
+          placeholder="Ex: Pierrot"
+        />
 
         <Pressable
           style={styles.botao}
