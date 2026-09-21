@@ -12,7 +12,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import axios from "axios";
 
 const API_KEY =
-  "cv_zj9zQ1zMsi6PvyG-l73gbZvZupEU0ZlJgchcJcWTVEwOPpCDbaf6QwgBSNCV3kB3";
+  "cv_2A1bwKgas3-94nqKQODSVJdqTJy2d9D77Eu0smDfByfiv2nHq4WFaESuKAFHCkUT";
 
 const api = axios.create({
   baseURL: "https://api-ds.codeverse.dev.br",
@@ -56,9 +56,11 @@ export default function AnimesCriarScreen() {
       setAnoLancamento("");
       setEstudio("");
     } catch (e) {
+      const detalhe = e.response?.data?.message || e.response?.data?.error;
       Alert.alert(
         "Não deu pra criar o anime",
-        "A API respondeu com erro. Confere se todos os campos estão certinhos e tenta de novo.",
+        detalhe ||
+          "A API respondeu com erro. Confere se todos os campos estão certinhos e tenta de novo.",
       );
     } finally {
       setEnviando(false);
